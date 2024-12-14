@@ -1,15 +1,18 @@
 [zero]
-max_value = 0
-supported = false
+max_size = 0
+is_above = false
 
 [equal]
-max_value = 10
-supported = false
+name = "name"
+max_size = 4
+is_above = false
 
 [above]
-max_value = 11
-supported = true
+name = "name"
+max_size = 3
+is_above = true
 
 [above_more]
-max_value = 100
-supported = true
+name = "a"
+max_size = 0
+is_above = true

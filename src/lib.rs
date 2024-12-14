@@ -157,7 +157,8 @@ fn impl_test_file_data(item: &ItemFn, path: LitStr, kind: LitStr) -> TokenStream
                     let mut iter = line.split(' ').filter(|f| !f.is_empty());
                     let mut column = 0;
                     #(
-                        let #field_names = iter.next().unwrap().parse().map_err(|e| format!("Invalid value in row={n} column={column} {file_path} {e}")).unwrap();
+                        let field = iter.next().unwrap();
+                        let #field_names = field.parse().map_err(|e| format!("Invalid value in row={n} column={column} {file_path} {e}")).unwrap();
                         column += 1;
                     )*
                     #call_ident(#(#field_names,)*);
@@ -206,8 +207,6 @@ fn impl_test_file_data(item: &ItemFn, path: LitStr, kind: LitStr) -> TokenStream
                     Collection::Index(v) => v,
                     Collection::Map(m) => m.into_iter().map(|(_, v)| v).collect(),
                 };
-
-                dbg!(&values);
 
                 if values.is_empty() {
                     panic!("Empty test data provided in {file_path}");

@@ -1,5 +1,5 @@
-max_value supported
-0         false
-10        false
-11        true
-100       true
+name  max_size is_above
+None  0        false
+name  4        false
+name  3        true
+a     0        true
