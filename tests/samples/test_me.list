@@ -1,4 +1,5 @@
-0 false
-10 false
-11 true
-100 true
+max_value supported
+0         false
+10        false
+11        true
+100       true

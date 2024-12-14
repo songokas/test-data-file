@@ -120,15 +120,21 @@ fn impl_test_file_data(item: &ItemFn, path: LitStr, kind: LitStr) -> TokenStream
                 struct _Data {
                     #(#field_names: #field_types,)*
                 }
+                let file_path = #path;
 
                 // Reading CSV data
                 let mut rdr = csv::ReaderBuilder::new()
-                    .from_path(#path)
+                    .from_path(file_path)
                     .unwrap();
+                let mut executed = false;
                 for result in rdr.deserialize() {
                     let record: _Data = result.unwrap();
+                    executed = true;
                     let _Data { #(#field_names,)* } = record;
                     #call_ident(#(#field_names,)*);
+                }
+                if !executed {
+                    panic!("Empty test data provided in {file_path}");
                 }
             }
         }
@@ -140,12 +146,24 @@ fn impl_test_file_data(item: &ItemFn, path: LitStr, kind: LitStr) -> TokenStream
                 let file_path = #path;
                 let f = std::fs::File::open(file_path).unwrap();
                 let lines = std::io::BufReader::new(f).lines();
+                let mut executed = false;
 
                 for (n, line) in lines.enumerate() {
+                    if n == 0 {
+                        continue;
+                    }
+                    executed = true;
                     let line = line.unwrap();
-                    let mut iter = line.split(' ');
-                    #(let #field_names = iter.next().unwrap().parse().map_err(|e| format!("Invalid value in row={n} {file_path} {e}")).unwrap();)*
+                    let mut iter = line.split(' ').filter(|f| !f.is_empty());
+                    let mut column = 0;
+                    #(
+                        let #field_names = iter.next().unwrap().parse().map_err(|e| format!("Invalid value in row={n} column={column} {file_path} {e}")).unwrap();
+                        column += 1;
+                    )*
                     #call_ident(#(#field_names,)*);
+                }
+                if !executed {
+                    panic!("Empty test data provided in {file_path}");
                 }
             }
         }
@@ -181,16 +199,25 @@ fn impl_test_file_data(item: &ItemFn, path: LitStr, kind: LitStr) -> TokenStream
                     Map(std::collections::HashMap<String, _Data>)
                 }
 
+                let file_path = #path;
+
                 let values: Collection = #serde_read;
                 let values = match values {
                     Collection::Index(v) => v,
                     Collection::Map(m) => m.into_iter().map(|(_, v)| v).collect(),
                 };
 
+                dbg!(&values);
+
+                if values.is_empty() {
+                    panic!("Empty test data provided in {file_path}");
+                }
+
                 for test_data in values {
                     let _Data { #(#field_names,)* } = test_data;
                     #call_ident(#(#field_names,)*);
                 }
+
             }
         }
     };
