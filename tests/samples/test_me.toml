@@ -1,0 +1,15 @@
+[zero]
+max_value = 0
+supported = false
+
+[equal]
+max_value = 10
+supported = false
+
+[above]
+max_value = 11
+supported = true
+
+[above_more]
+max_value = 100
+supported = true

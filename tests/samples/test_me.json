@@ -1,0 +1,18 @@
+[
+    {
+        "max_value": 0,
+        "supported": false
+    },
+    {
+        "max_value": 10,
+        "supported": false
+    },
+    {
+        "max_value": 11,
+        "supported": true
+    },
+    {
+        "max_value": 100,
+        "supported": true
+    }
+]
