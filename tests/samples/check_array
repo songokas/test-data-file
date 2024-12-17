@@ -1,0 +1,8 @@
+{
+    "check_array1": {
+        "value": ["1", "2"]
+    },
+    "check_array2": {
+        "value": ["3", "4"]
+    }
+}

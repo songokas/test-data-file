@@ -1,0 +1,7 @@
+---
+source: tests/insta.rs
+expression: split_words(&words)
+snapshot_kind: text
+---
+- dear
+- marry
