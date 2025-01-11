@@ -1,0 +1,20 @@
+{
+    "user is not cool": {
+        "user": {
+            "is_cool": false,
+            "address": {
+                "town": "Kentucky",
+                "country": "US"
+            }
+        }
+    },
+    "user is not from the right country": {
+        "user": {
+            "is_cool": false,
+            "address": {
+                "town": "Unknown",
+                "country": "BE"
+            }
+        }
+    }
+}
