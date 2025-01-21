@@ -8,6 +8,7 @@ use syn::{meta::ParseNestedMeta, parse_macro_input, FnArg, ItemFn, LitStr, Pat};
 
 const SUPPORTED_KINDS: [&str; 6] = ["csv", "json", "yaml", "ron", "toml", "list"];
 
+#[allow(clippy::test_attr_in_doctest)]
 /// Provide sample data from a file to your test function
 ///
 /// # Arguments
@@ -18,11 +19,12 @@ const SUPPORTED_KINDS: [&str; 6] = ["csv", "json", "yaml", "ron", "toml", "list"
 /// # Example
 ///
 /// ```
+/// use test_data_file::test_data_file;
 /// #[test_data_file(path = "tests/samples/test_me.yaml")]
 /// #[test]
 /// fn test_is_name_above_max_size(name: Option<String>, max_size: usize, is_above: bool) {
 ///     assert_eq!(
-///         is_name_above_max_size(name.as_deref(), max_size),
+///         name.map(|n| n.len()) > Some(max_size),
 ///         is_above,
 ///         "failed for {max_size}"
 ///     );
