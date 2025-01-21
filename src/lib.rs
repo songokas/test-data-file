@@ -8,6 +8,27 @@ use syn::{meta::ParseNestedMeta, parse_macro_input, FnArg, ItemFn, LitStr, Pat};
 
 const SUPPORTED_KINDS: [&str; 6] = ["csv", "json", "yaml", "ron", "toml", "list"];
 
+/// Provide sample data from a file to your test function
+///
+/// # Arguments
+///
+/// * path - path to the sample
+/// * kind - optional file format (if extension is not specified)
+///
+/// # Example
+///
+/// ```
+/// #[test_data_file(path = "tests/samples/test_me.yaml")]
+/// #[test]
+/// fn test_is_name_above_max_size(name: Option<String>, max_size: usize, is_above: bool) {
+///     assert_eq!(
+///         is_name_above_max_size(name.as_deref(), max_size),
+///         is_above,
+///         "failed for {max_size}"
+///     );
+/// }
+/// ```
+///
 #[proc_macro_attribute]
 pub fn test_data_file(args: TokenStream, item: TokenStream) -> TokenStream {
     let mut func = parse_macro_input!(item as ItemFn);

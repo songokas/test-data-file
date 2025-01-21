@@ -1,12 +1,12 @@
 # About
 
+Macro to provide sample data to your test functions
+
 Separate your tests from a testing data.
 
 Use a simple sample file to drive your tests.
 
 Concern yourself with providing a good sample data instead of writing a test itself.
-
-Testing data readability matters.
 
 Reuse testing data where it makes sense.
 
