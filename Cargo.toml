@@ -1,6 +1,6 @@
 [package]
 name = "test-data-file"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "test macro helper to provide test data from a file"
 license-file = "LICENSE"
