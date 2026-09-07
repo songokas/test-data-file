@@ -1,0 +1,41 @@
+[valid_passphrase]
+email = "ada@example.com"
+password = "horse-battery-staple"
+age = 34
+accepted_terms = true
+expected_valid = true
+
+[valid_password]
+email = "grace@example.com"
+password = "Hopper1906"
+age = 47
+accepted_terms = true
+expected_valid = true
+
+[missing_at_sign]
+email = "not-an-email"
+password = "Hopper1906"
+age = 29
+accepted_terms = true
+expected_valid = false
+
+[password_too_short]
+email = "kay@example.com"
+password = "secret"
+age = 22
+accepted_terms = true
+expected_valid = false
+
+[below_min_age]
+email = "sam@example.com"
+password = "trombone-clip"
+age = 12
+accepted_terms = true
+expected_valid = false
+
+[terms_declined]
+email = "lin@example.com"
+password = "trombone-clip"
+age = 29
+accepted_terms = false
+expected_valid = false

@@ -1,0 +1,8 @@
+INSERT INTO signups (email, password, age, accepted_terms, expected_valid)
+VALUES
+  ('ada@example.com', 'horse-battery-staple', 34, true, true),
+  ('grace@example.com', 'Hopper1906', 47, true, true),
+  ('not-an-email', 'Hopper1906', 29, true, false),
+  ('kay@example.com', 'secret', 22, true, false),
+  ('sam@example.com', 'trombone-clip', 12, true, false),
+  ('lin@example.com', 'trombone-clip', 29, false, false);

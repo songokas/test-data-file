@@ -1,0 +1,23 @@
+{
+    "active pro account": {
+        "account": {
+            "username": "ada",
+            "is_active": true,
+            "profile": { "country": "US", "plan": "pro" }
+        }
+    },
+    "active free account": {
+        "account": {
+            "username": "lin",
+            "is_active": true,
+            "profile": { "country": "GB", "plan": "free" }
+        }
+    },
+    "inactive pro account": {
+        "account": {
+            "username": "sam",
+            "is_active": false,
+            "profile": { "country": "DE", "plan": "pro" }
+        }
+    }
+}

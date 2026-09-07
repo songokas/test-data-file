@@ -1,0 +1,9 @@
+- email: "ada@example.com"
+  locale: "en-US"
+  expect_sent: true
+- email: "grace@example.com"
+  locale: "en-GB"
+  expect_sent: true
+- email: "not-an-email"
+  locale: "en-US"
+  expect_sent: false

@@ -68,3 +68,13 @@ fn test_test_me_with_csv(name: Option<String>, max_size: usize, is_above: bool) 
         "failed for {max_size}"
     );
 }
+
+#[test_data_file(path = "tests/samples/test_me.sql")]
+#[test]
+fn test_test_me_with_sql(name: Option<String>, max_size: usize, is_above: bool) {
+    assert_eq!(
+        is_name_above_max_size(name.as_deref(), max_size),
+        is_above,
+        "failed for {max_size}"
+    );
+}

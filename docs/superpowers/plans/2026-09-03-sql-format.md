@@ -305,7 +305,9 @@ git commit -m "Add kind = \"sql\" support for flat INSERT INTO test data"
 - Modify: `tests/complex_types.rs`
 
 **Interfaces:**
-- Consumes: `__test_data_file_load_sql_rows` from Task 1 — its root-detection/FK-join/column-stripping logic is exercised here for the first time, no code changes to `src/lib.rs` are expected.
+- Consumes: `__test_data_file_load_sql_rows` from Task 1 — its root-detection/FK-join/column-stripping logic is exercised here for the first time.
+
+**Deviation from plan (discovered while executing this task):** Task 1's original code did *not* wrap the root row under a key matching the decorated function's parameter name. For a single-parameter function like `fn f(user: User)`, `_Data` is `struct _Data { user: User }`, so each row handed to `serde_json::from_value` must be `{"user": {...}}`, not `{...}` directly — exactly like the existing JSON nested example wraps each entry under `"user"`. Task 1's flat-case test didn't catch this because it has 3 parameters, so no wrapping was ever needed there. Fixed by threading the decorated function's parameter names into `__test_data_file_load_sql_rows` (as a new `target_field_names: &[&str]` parameter, passed at the call site via `&[#(stringify!(#field_names)),*]`) and wrapping the root row under the root table's name when `target_field_names` has exactly one entry matching the root table's name. This was applied directly to `src/lib.rs` (the Task 1 code block, already committed) as its own small fix commit before Task 2's own commit, since it's a correction to Task 1's implementation, not new functionality.
 
 - [ ] **Step 1: Add nested sample files**
 

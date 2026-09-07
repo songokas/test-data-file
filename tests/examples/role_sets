@@ -1,0 +1,5 @@
+{
+    "admin_and_billing": { "roles": ["admin", "billing"] },
+    "single_viewer":     { "roles": ["viewer"] },
+    "editor_and_viewer": { "roles": ["editor", "viewer"] }
+}
